@@ -1,0 +1,7 @@
+{
+  "name": "loginform",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
