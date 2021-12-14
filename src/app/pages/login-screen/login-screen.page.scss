@@ -25,6 +25,13 @@ ion-item {
   ion-input {
     color: #647b9d;
   }
+  ion-icon {
+    padding-right: 6px;
+    font-size: 18px;
+  }
+  ion-input:hover {
+    color: #1248a0;
+  }
 }
 
 .password_forgot {
@@ -39,7 +46,13 @@ ion-item {
   padding-top: 20px;
   .sign-btn {
     --ion-primary-color: #215ab7;
+    --background-activated: #e1eaf9;
+    --background-focused: #e1eaf9;
+    --background-hover: #647b9d;
     color: #f4f6fa;
+    border-radius: 25px;
+    --background: #215ab7;
+    background-color: #215ab7;
   }
 }
 
@@ -65,4 +78,29 @@ ion-item {
 ion-card {
   --ion-background-color: transparent;
   box-shadow: none !important;
+}
+
+.ion-card-footer {
+  width: 100%;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  span {
+    color: #85888d;
+    font-size: 12px;
+    font-weight: 200;
+  }
+
+  button {
+    background-color: transparent;
+    font-size: 14px;
+    font-weight: 400;
+    padding-left: 3px;
+    color: #535588;
+  }
+
+  button:hover {
+    color: #969393;
+  }
 }

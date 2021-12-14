@@ -5,15 +5,13 @@
   </ion-buttons>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
   <ion-card class="ion-no-margin">
     <ion-img src="assets/images/header1.png"> </ion-img>
 
     <ion-card-content>
       <div class="wrapform">
         <ion-item>
-          <ion-icon name="mail-outline"></ion-icon>
-
           <ion-input
             type="email"
             placeholder="Email"
@@ -21,11 +19,10 @@
             [(ngModel)]="email"
             required
           >
+            <ion-icon name="mail-outline"></ion-icon>
           </ion-input>
         </ion-item>
         <ion-item>
-          <ion-icon name="lock-closed-outline"></ion-icon>
-
           <ion-input
             type="password"
             name="password"
@@ -33,6 +30,7 @@
             [(ngModel)]="password"
             required
           >
+            <ion-icon name="lock-closed"></ion-icon>
           </ion-input>
         </ion-item>
       </div>
@@ -63,4 +61,8 @@
       </div>
     </ion-card-content>
   </ion-card>
+  <div class="ion-card-footer">
+    <span>Don't have an account?</span
+    ><button class="ion-no-padding">Sign Up</button>
+  </div>
 </ion-content>
