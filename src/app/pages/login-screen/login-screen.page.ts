@@ -1,5 +1,6 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login-screen',
@@ -21,7 +22,7 @@ export class LoginScreenPage implements OnInit, DoCheck {
   };
 
 
-  constructor(public formBuilder: FormBuilder) { }
+  constructor(public formBuilder: FormBuilder, public authService: AuthService) { }
 
   ngOnInit() {
     this.validationFormUser = this.formBuilder.group({
@@ -46,7 +47,16 @@ export class LoginScreenPage implements OnInit, DoCheck {
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
   LoginUser(value) {
-    console.log("Am logged in")
+    console.log("Am logged in");
+    try {
+      this.authService.loginFireauth(value).then(resp => {
+        console.log(resp);
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
+
+
 
 }
