@@ -1,5 +1,6 @@
 import { Component, DoCheck, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -22,7 +23,7 @@ export class LoginScreenPage implements OnInit, DoCheck {
   };
 
 
-  constructor(public formBuilder: FormBuilder, public authService: AuthService) { }
+  constructor(public formBuilder: FormBuilder, public authService: AuthService, public router: Router) { }
 
   ngOnInit() {
     this.validationFormUser = this.formBuilder.group({
@@ -38,19 +39,21 @@ export class LoginScreenPage implements OnInit, DoCheck {
   }
 
   ngDoCheck(): void {
-    console.log(this.validationFormUser);
-    console.log('email', this.validationFormUser.get('email'))
-    console.log('password', this.validationFormUser.get('password'))
-    // console.log('password error', this.validationFormUser.get('password').hasError);
-    console.log('password error', this.validationFormUser.get('password').hasError('minlength'));
+    // console.log(this.validationFormUser);
+    // console.log('email', this.validationFormUser.get('email'))
+    // console.log('password', this.validationFormUser.get('password'))
+    // // // console.log('password error', this.validationFormUser.get('password').hasError);
+    // console.log('password error', this.validationFormUser.get('password').hasError('minlength'));
   }
 
   // eslint-disable-next-line @typescript-eslint/naming-convention
   LoginUser(value) {
-    console.log("Am logged in");
+    // console.log("Am logged in");
+    console.log(value);
     try {
       this.authService.loginFireauth(value).then(resp => {
         console.log(resp);
+        this.router.navigate(['tabs']);
       });
     } catch (err) {
       console.log(err);

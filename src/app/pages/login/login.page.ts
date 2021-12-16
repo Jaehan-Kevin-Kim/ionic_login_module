@@ -14,6 +14,10 @@ export class LoginPage implements OnInit {
   gotoLoginpage() {
     this.nav.navigateForward(['login-screen']);
   }
+  registerUser() {
+    this.nav.navigateForward(['signup']);
+  }
+
   ngOnInit() {
   }
 
