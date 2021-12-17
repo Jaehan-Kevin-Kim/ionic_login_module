@@ -33,8 +33,10 @@
           <ng-container *ngFor="let validation of validationMessages.names">
             <div
               class="error_message"
-              *ngIf="validationFormUserSignup.get('names').hasError(validation.type)"
-            ></div>
+              *ngIf="validationFormUserSignup.get('names').hasError(validation.type) && (validationFormUserSignup.get('names').dirty || validationFormUserSignup.get('names').touched)"
+            >
+              {{validation.message}}
+            </div>
           </ng-container>
         </div>
         <ion-item>
@@ -42,11 +44,22 @@
             type="number"
             name="Phone"
             placeholder="Phone No."
-            formControlName="number"
+            formControlName="phone"
           >
             <ion-icon name="call-outline"></ion-icon>
           </ion-input>
         </ion-item>
+        <div>
+          <ng-container *ngFor="let validation of validationMessages.phone">
+            <div
+              class="error_message"
+              *ngIf="validationFormUserSignup.get('phone').hasError(validation.type) && (validationFormUserSignup.get('phone').dirty || validationFormUserSignup.get('phone').touched)"
+            >
+              {{validation.message}}
+            </div>
+          </ng-container>
+        </div>
+
         <ion-item>
           <ion-input
             type="email"
@@ -57,23 +70,45 @@
             <ion-icon name="mail-outline"></ion-icon>
           </ion-input>
         </ion-item>
+
+        <div>
+          <ng-container *ngFor="let validation of validationMessages.email">
+            <div
+              class="error_message"
+              *ngIf="validationFormUserSignup.get('email').hasError(validation.type) && (validationFormUserSignup.get('email').dirty || validationFormUserSignup.get('email').touched)"
+            >
+              {{validation.message}}
+            </div>
+          </ng-container>
+        </div>
+
         <ion-item>
           <ion-input
             type="password"
             name="password"
-            placeholder="Password"
+            placeholder="******"
             formControlName="password"
           >
             <ion-icon name="lock-closed-outline"></ion-icon>
           </ion-input>
         </ion-item>
+
+        <ng-container *ngFor="let validation of validationMessages.password">
+          <div
+            class="error_message"
+            *ngIf="validationFormUserSignup.get('password').hasError(validation.type) && (validationFormUserSignup.get('password').dirty || validationFormUserSignup.get('password').touched)"
+          >
+            {{validation.message}}
+          </div>
+        </ng-container>
+
         <div class="sign-btn-wrap">
           <ion-button
             type="submit"
             shape="round"
             fill="solid"
             class="sign-btn"
-            [disabled]="!validationFormUser.valid"
+            [disabled]="!validationFormUserSignup.valid"
           >
             Sign Up
           </ion-button>

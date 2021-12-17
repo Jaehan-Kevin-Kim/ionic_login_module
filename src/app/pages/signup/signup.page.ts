@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/quotes */
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -9,8 +11,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class SignupPage implements OnInit {
   validationFormUserSignup: FormGroup;
-  helloForm: FormGroup;
-  hello = "hello";
+  loading: any;
 
   validationMessages = {
     names: [{ type: "required", message: "Please Enter your Full Names" }],
@@ -21,12 +22,12 @@ export class SignupPage implements OnInit {
     ],
     password: [
       { type: "required", message: "password is required here" },
-      { type: "minlength", message: "Passwrd must be at least 6 character" }
+      { type: "minlength", message: "Password must be at least 6 character" }
     ]
-  }
+  };
 
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.validationFormUserSignup = this.formBuilder.group({
@@ -52,7 +53,40 @@ export class SignupPage implements OnInit {
   }
 
   registerUser(value) {
+    this.showalert();
+    try {
+      this.authService.userRegistration(value).then(response => {
+        console.log(response);
+        if (response.user) {
+          response.updateProfile({
+            displayName: value.name,
+            email: value.email,
+            phoneNumber: value.phone,
+          });
 
+          this.loading.dismiss();
+          this.router.navigate(['loginscreen'])
+        }
+      })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async errorLoading(message: any) {
+    const loading = await this.alertCtrl.crete({
+
+
+    })
+
+
+  }
+
+  async showalert() {
+    var load = await this.alertCtrl.create({
+      message: "please wait...."
+    })
+    load.present();
   }
 
 
